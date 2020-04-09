@@ -2,9 +2,23 @@
 
 -- Find all customers with postal code 1010
 
+SELECT *
+FROM [Customers]
+where PostalCode = 1010;
+
 -- Find the phone number for the supplier with the id 11
 
+SELECT Phone
+FROM [Suppliers]
+where SupplierID = 11;
+
 -- List first 10 orders placed, sorted descending by the order date
+
+SELECT *
+FROM [Orders]
+where OrderID between 10248 and 10258
+order by OrderDate desc
+limit 10
 
 -- Find all customers that live in London, Madrid, or Brazil
 
