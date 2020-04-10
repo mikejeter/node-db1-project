@@ -26,11 +26,28 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
+const accountData = req.body;
+	db('accounts')
+    .insert(accountData)
+    .then(account => res.status(200).json(account))
+    .catch(err => res.status(500).json({  message: "failed to create new account", err}));
 });
 
 router.put('/:id', (req, res) => {
+    const {id} = req.params;
+    const changes = req.body;
 
+    db('accounts')
+    .where({id})
+    .update(changes)
+    .then(count => {
+        if (count) {
+            res.json({ updated: count});
+        } else {
+            res.status(404).json({ message: "invalid id"});
+        }
+    })
+    .catch(err => res.status(500).json({ message: "error updating", err}));
 });
 
 router.delete('/:id', (req, res) => {
