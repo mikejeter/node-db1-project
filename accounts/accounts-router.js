@@ -64,7 +64,7 @@ router.delete('/:id', (req, res) => {
             res.status(404).json({ message: "invalid id"});
         }
     })
-    .catch(err => res.status(500).json({ message: "error updating", err}));
+    .catch(err => res.status(500).json({ message: "error deleting", err}));
 });
 
 module.exports = router;
