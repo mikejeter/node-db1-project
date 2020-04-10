@@ -51,7 +51,20 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+    const {id} = req.params;
+    const changes = req.body;
 
+    db('accounts')
+    .where({id})
+    .del()
+    .then(count => {
+        if (count) {
+            res.json({ updated: count});
+        } else {
+            res.status(404).json({ message: "invalid id"});
+        }
+    })
+    .catch(err => res.status(500).json({ message: "error updating", err}));
 });
 
 module.exports = router;
